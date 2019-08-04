@@ -1,0 +1,14 @@
+<p contentEditable="true">
+    {{task.task}}
+    <br>
+    <small> Created On: {{task._id | date: 'medium'}}</small>
+</p>
+
+
+
+<p *ngIf="remainingTime">
+    Time Remaining: {{remainingTime}}
+</p>
+
+
+

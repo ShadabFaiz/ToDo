@@ -1,0 +1,19 @@
+
+
+form {
+    width: 50%;
+    min-width: 200px;
+}
+
+form > mat-form-field {
+    display: block;
+}
+
+form > .task {
+    width: 100%;
+}
+
+.taskOption {
+    width: 30%;
+    min-width: fit-content;
+}

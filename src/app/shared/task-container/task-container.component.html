@@ -1,0 +1,6 @@
+<div class="taskWrapper">
+    <app-task *ngFor="let task of taskList" 
+    [task]="task"
+    (expired)="onTaskExpire($event)"
+    ></app-task>
+</div>
