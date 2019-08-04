@@ -27,7 +27,7 @@ export class AppComponent {
   onFormSubmit() {
     const newTask = <IToDO>{...this.toDoForm.value, _id: Date.now()};
     this._taskService.addNewTask(newTask)
-    this.toDoForm.reset({});
+    this.toDoForm.reset({status: 'on-going'});
   }
 
 
@@ -38,7 +38,7 @@ export class AppComponent {
     this._taskService.streamTasks().subscribe(newTask => {
       console.log(newTask);
       // this.tasks.push(task);
-      this.tasks = [...this.tasks, newTask];
+      this.tasks = [newTask, ...this.tasks ];
     },
     err => {},
     () => console.log('got all')
@@ -49,7 +49,8 @@ export class AppComponent {
   protected initializeForm() {
     this.toDoForm = this._formBuilder.group({
       task: [null, Validators.required],
-      expiresOn: null
+      expiresOn: null,
+      status: 'on-going'
     });
   }
 

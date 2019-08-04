@@ -1,12 +1,22 @@
-<p contentEditable="true">
+<div class="taskStatusIndicator" [ngClass]="{'red': remainingTime < 60,'orange': remainingTime < 120, 'green': remainingTime > 120  }"></div>
+<p>
     {{task.task}}
     <br>
+    Status: {{task.status}}
+    <br>
     <small> Created On: {{task._id | date: 'medium'}}</small>
+
 </p>
 
+<span class="iconWrapper"> 
+    <i *ngIf="task.status === 'on-going'" class="fas fa-check-square" (click)="markAsCompleted()"></i>
+    <i class="fas fa-trash" (click)="deleteTask()"></i>
+ </span>
 
 
-<p *ngIf="remainingTime">
+
+
+<p *ngIf="remainingTime > 0">
     Time Remaining: {{remainingTime}}
 </p>
 

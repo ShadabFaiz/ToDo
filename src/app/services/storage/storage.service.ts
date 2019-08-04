@@ -8,7 +8,7 @@ export class StorageService {
    private defaultTasks: IToDO[] = [
      {
         task: 'task 1', expiresOn: {duration: 30, type: 'sec', text: '30 secs'}, 
-        _id: Date.now(), status: 'completed'},
+        _id: Date.now(), status: 'on-going'},
      {
        task: 'task 2', expiresOn: {duration: 60, type: 'min', text: '30 secs'}, 
        _id: Date.now() - (8*1000),
@@ -38,7 +38,7 @@ export class StorageService {
      let tasks: IToDO[];
       try {
        tasks = JSON.parse(localStorage.getItem('tasks'));
-       tasks = tasks ? tasks : this.defaultTasks;
+       tasks = tasks && tasks.length ? tasks : this.defaultTasks;
       } catch (error) {
         tasks = this.defaultTasks;
       }
@@ -56,10 +56,25 @@ export class StorageService {
      localStorage.setItem('tasks', JSON.stringify(newTasks));
    }
 
+    removeTask(taskToRemove: IToDO) {
+     this.userCreatedTasks = this.userCreatedTasks.filter(task => task._id !== taskToRemove._id);
+     this.setNewTaskList(this.userCreatedTasks);
+   }
+
+
+   updateTask(taskToupdate: IToDO) {
+    const index = this.userCreatedTasks.findIndex(task => task._id === taskToupdate._id);
+    if(index >= 0) {
+      this.userCreatedTasks[index] = taskToupdate;
+      this.setNewTaskList(this.userCreatedTasks);
+    }
+   }
+
 
    private initializeUserCreateTasks() {
      try {
-       this.userCreatedTasks = JSON.parse(localStorage.getItem('tasks'));
+       const tasks = JSON.parse(localStorage.getItem('tasks'));
+       this.userCreatedTasks = tasks ? tasks : [];
      } catch (error) {
       this.userCreatedTasks = [];
      }

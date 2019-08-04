@@ -7,8 +7,20 @@
 app-task {
     display: block;
     margin: 1% auto;
-    background: rgb(138, 136, 136);
+    background: #12af5b;
     border-radius: 5px;
     padding: 1% 2%;
     color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.searchForm {
+    justify-content: start;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.searchForm > mat-form-field {
+    margin: 1% 2%;
 }

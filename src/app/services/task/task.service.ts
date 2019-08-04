@@ -27,7 +27,14 @@ export class TaskService {
     this._storageService.saveNewTask(newTask);
   }
 
-  removeTask() {
+  removeTask(taskToRemove: IToDO) {
+    this._storageService.removeTask(taskToRemove);
+  }
+
+
+  updateTask(taskToUpdate: IToDO) {
+    console.log({...taskToUpdate});
     
+    this._storageService.updateTask(taskToUpdate);
   }
 }

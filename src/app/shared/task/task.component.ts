@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IToDO } from 'src/models/IToDo';
+import { TaskSortUtil } from 'src/utils/TaskSortUtil';
 
 @Component({
   selector: 'app-task',
@@ -12,21 +13,36 @@ export class TaskComponent implements OnInit {
   task: IToDO;
 
   @Output() expired = new EventEmitter<IToDO>();
+  @Output() delete = new EventEmitter<IToDO>();
+  @Output() complete = new EventEmitter<IToDO>();
   remainingTime: number;  // Denote how much time is left before task is expired.
-
+  interval;
 
   constructor() { 
   }
 
   ngOnInit() {
     this.setExpireTime(this.task);
-    if(this.task.expiresOn)
-      setInterval(() => {this.updateRemainingTime(this.task)}, 1000);
+    if(this.task.expiresOn && this.task.status === 'on-going')
+      this.interval = setInterval(() => {
+        if(this.task.status !== 'on-going') clearInterval(this.interval);
+        this.updateCurrentState();
+      }, 1000);
+  }
+
+  deleteTask() {
+    this.delete.emit(this.task);
+  }
+
+  markAsCompleted() {
+    this.task = {...this.task, status: 'completed'};
+    this.complete.emit(this.task);
   }
 
 
   private setExpireTime(task: IToDO) {
-    let taskExpiresOn = this.getTaskExpirationTime(task);
+    if(this.task.status !== 'on-going') return;
+    let taskExpiresOn = TaskSortUtil.getTaskExpirationTime(task);
     if(taskExpiresOn) {
       const remainingTimeInSec = (taskExpiresOn.getTime() - Date.now())/1000;
       setTimeout(() => {
@@ -35,21 +51,23 @@ export class TaskComponent implements OnInit {
     }
   }
 
-  private updateRemainingTime(task: IToDO) {
-    let taskExpiresOn = this.getTaskExpirationTime(task);
-    this.remainingTime = taskExpiresOn ?
-     +((taskExpiresOn.getTime() - Date.now())/1000).toFixed(0): null;
+
+  private updateCurrentState() {
+    this.updateRemainingTime(this.task);
+    this.updateTaskStatus();
   }
 
 
-  private getTaskExpirationTime(task: IToDO) {
-    if(!task.expiresOn) return null;
-    switch(this.task.expiresOn.type) {
-      case 'sec': return new Date( task.expiresOn.duration*1000 + task._id);
-      case 'min': return  new Date( (task.expiresOn.duration * 60 * 1000) + task._id  );
-      case 'hr': return new Date((task.expiresOn.duration * 60 * 60 * 1000) + task._id);
-      default: return null;
-    };
+  private updateTaskStatus() {
+    if(this.remainingTime <= 0)
+      this.task = {...this.task, status: 'expired'};
+  }
+
+  private updateRemainingTime(task: IToDO) {
+    if(this.remainingTime <= 0) return;
+    let taskExpiresOn = TaskSortUtil.getTaskExpirationTime(task);
+    this.remainingTime = taskExpiresOn ?
+     +((taskExpiresOn.getTime() - Date.now())/1000).toFixed(0): null;
   }
 
 }

@@ -1,6 +1,29 @@
 <div class="taskWrapper">
-    <app-task *ngFor="let task of taskList" 
+
+    <form [formGroup]="searchForm" class="searchForm">
+            <mat-form-field>
+                    <mat-label>Filter By</mat-label>
+                    <mat-select multiple formControlName="filterBy">
+                      <mat-option *ngFor="let option of filterOptions" [value]="option.value">
+                        {{option.text}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Sort By</mat-label>
+                    <mat-select formControlName="sortBy">
+                      <mat-option *ngFor="let option of sortingOption" [value]="option.value">
+                        {{option.text}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+    </form>
+
+    <app-task *ngFor="let task of filteredList" 
     [task]="task"
     (expired)="onTaskExpire($event)"
+    (delete)="onTaskDelete($event)"
+    (complete)="onTaskComplete($event)"
     ></app-task>
 </div>
