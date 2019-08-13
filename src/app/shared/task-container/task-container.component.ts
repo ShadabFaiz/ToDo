@@ -58,6 +58,7 @@ export class TaskContainerComponent implements OnInit, OnChanges {
 
   onTaskDelete(taskToDelete: IToDO) {
     this.taskList = this.taskList.filter(task => task._id !== taskToDelete._id);
+    this.updateListInView();
     this._taskService.removeTask(taskToDelete);
   }
 
