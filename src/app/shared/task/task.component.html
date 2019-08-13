@@ -1,19 +1,19 @@
 <div class="wrapper" [ngClass]="{
-'expired': task.status === 'expired' ,
-'completed': task.status === 'completed',
-'orange': remainingTime < 120 && task.status === 'on-going', 
-'on-going': remainingTime > 120 || task.status === 'on-going'   }">
+'expired': task?.status === 'expired' ,
+'completed': task?.status === 'completed',
+'orange': remainingTime < 120 && task?.status === 'on-going', 
+'on-going': remainingTime > 120 || task?.status === 'on-going'   }">
 <p>
-    {{task.task}}  
+    {{task?.task}}  
     <br>
-    Status: {{task.status}} 
+    Status: {{task?.status}} 
     <br>
-    <small> Created On: {{task._id | date: 'medium'}}</small>
+    <small> Created On: {{task?._id | date: 'medium'}}</small>
 
 </p>
 
 <span class="iconWrapper"> 
-    <i *ngIf="task.status === 'on-going'" class="fas fa-check-square" (click)="markAsCompleted()"></i>
+    <i *ngIf="task?.status === 'on-going'" class="fas fa-check-square" (click)="markAsCompleted()"></i>
     <i class="fas fa-trash" (click)="deleteTask()"></i>
  </span>
 

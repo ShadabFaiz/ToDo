@@ -21,12 +21,14 @@ export class TaskComponent implements OnInit {
   constructor() {   }
 
   ngOnInit() {
+   if(this.task) {
     this.setExpireTime(this.task);
     if(this.task.expiresOn && this.task.status === 'on-going')
       this.interval = setInterval(() => {
         if(this.task.status !== 'on-going') clearInterval(this.interval);
         this.updateCurrentState();
       }, 1000);
+   }
   }
 
   deleteTask() {
@@ -41,6 +43,7 @@ export class TaskComponent implements OnInit {
 
 
   private setExpireTime(task: IToDO) {
+    // console.log(` task `, this.task);
     if(this.task.status !== 'on-going') return;
     let taskExpiresOn = TaskSortUtil.getTaskExpirationTime(task);
     if(taskExpiresOn) {

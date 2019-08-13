@@ -13,14 +13,16 @@
                   <mat-form-field>
                     <mat-label>Sort By</mat-label>
                     <mat-select formControlName="sortBy">
-                      <mat-option *ngFor="let option of sortingOption" [value]="option.value">
+                      <mat-option *ngFor="let option of sortingOption" [value]="option?.value">
                         {{option.text}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
     </form>
 
-    <app-task *ngFor="let task of filteredList" 
+    <app-task 
+    [@TopToBottom]
+    *ngFor="let task of filteredList"
     [task]="task"
     (expired)="onTaskExpire($event)"
     (delete)="onTaskDelete($event)"

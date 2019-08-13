@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TaskService } from 'src/app/services/task/task.service';
@@ -9,50 +10,14 @@ import { sortCondition, TaskSortUtil } from 'src/utils/TaskSortUtil';
   templateUrl: './task-container.component.html',
   styleUrls: ['./task-container.component.scss'],
   animations: [
-		// trigger('task', [
-		// 	transition('void => *', [
-		// 		style({transform: 'translateX(-100px)', opacity: 0, position: 'absolute', width: '!'}),
-		// 		animate(`550ms 500ms`, style({
-		// 			transform: 'translateX(0)',
-		// 			opacity: 1,
-
-		// 		}))
-    //   ]),
-      
-    //   state('true', style({
-    //     height: '200px',
-    //     opacity: 0,
-    //     backgroundColor: 'yellow'
-    //   })),
-
-
-		// 	transition('* => void', [
-		// 		style({transform: 'translateX(0)', opacity: 1, position: 'absolute', width: '!'}),
-		// 		animate(`150ms`, style({
-		// 			transform: 'translateX(-100px)',
-		// 			opacity: 0,
-
-		// 		}))
-		// 	]),
-
-		// 	// transition('true => void', [
-		// 	// 	style({transform: 'translateX(0)', opacity: 1, position: 'absolute', width: '!'}),
-		// 	// 	animate(150, style({
-		// 	// 		transform: 'translateX(-100px)',
-		// 	// 		opacity: 0,
-
-		// 	// 	}))
-		// 	// ]),
-
-		// 	// transition('void => true', [
-		// 	// 	style({transform: 'translateX(-100px)', opacity: 0, position: 'absolute', width: '!'}),
-		// 	// 	animate(`150ms 200ms`, style({
-		// 	// 		transform: 'translateX(0)',
-		// 	// 		opacity: 1,
-
-		// 	// 	}))
-		// 	// ]),
-    // ])
+    trigger('TopToBottom', [  
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate('1s ease-in-out', style({ transform: 'translateX(0)', opacity: 1  }))]),
+      transition(':leave', [
+        style({ transform: 'translateX(0)', opacity: 1 }),
+        animate('1s ease-in-out', style({ transform: 'translateX(100%)', opacity: 0  }))])
+    ])
   ]
 
 })
