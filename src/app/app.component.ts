@@ -33,8 +33,6 @@ export class AppComponent {
 
   private getTaskList() {
     this._taskService.streamTasks().subscribe(newTask => {
-      console.log(newTask);
-      // this.tasks.push(task);
       this.tasks = [newTask, ...this.tasks ];
     },
     err => {},

@@ -73,7 +73,7 @@ export class TaskContainerComponent implements OnInit, OnChanges {
     {value: 'timeLeft', text: 'Remaining Time'}
   ];
 
-  filteredList;
+  filteredList: IToDO[];
 
 
   constructor(private _taskService: TaskService, private _formBuilder: FormBuilder) { 
@@ -86,6 +86,8 @@ export class TaskContainerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes) {
+    console.log(changes);
+    this.updateListInView();
   }
 
 
@@ -115,21 +117,29 @@ export class TaskContainerComponent implements OnInit, OnChanges {
     expiredTask = {...expiredTask, status: 'expired'};
     const index = this.taskList.findIndex(task => task._id === expiredTask._id);
     if(index >= 0) this.taskList[index] = expiredTask;
-    this.onFilterByChange(this.searchForm.value.filterBy, this.taskList);
+    this.updateListInViewByFilterCondition(this.searchForm.value.filterBy, this.taskList);
     // this.taskList = this.taskList.filter(task => task._id !== expiredTask._id);
+  }
+
+
+  private updateListInView() {
+    this.searchForm.controls.filterBy.updateValueAndValidity();
+    this.searchForm.controls.sortBy.updateValueAndValidity();
   }
 
 
   private listenToForm() {
     this.searchForm.controls.filterBy.valueChanges.subscribe(list => {
-      this.onFilterByChange(list, this.taskList);
+      this.updateListInViewByFilterCondition(list, this.taskList);
     });
     this.searchForm.controls.sortBy.valueChanges.subscribe((newSortCondition: sortCondition) => {
-        this.onSortConditionChange(newSortCondition, this.filteredList)
+        this.updateListInViewBySortCondition(newSortCondition, this.filteredList)
     });
   }
 
-  private onFilterByChange(newFilterList: TODOSTATUS[], listToFilter: IToDO[]) {
+
+
+  private updateListInViewByFilterCondition(newFilterList: TODOSTATUS[], listToFilter: IToDO[]) {
     const newFilteredList = this.filterTaskByStatus(listToFilter, newFilterList);
     const sortCondition = <sortCondition>this.searchForm.controls.sortBy.value;
     this.filteredList =  TaskSortUtil.sortTaskBy(sortCondition, newFilteredList);
@@ -137,7 +147,7 @@ export class TaskContainerComponent implements OnInit, OnChanges {
 
   }
 
-  private onSortConditionChange(newSortCondition: sortCondition, listToSort: IToDO[]) {
+  private updateListInViewBySortCondition(newSortCondition: sortCondition, listToSort: IToDO[]) {
     this.filteredList = TaskSortUtil.sortTaskBy(newSortCondition, listToSort);
   }
 

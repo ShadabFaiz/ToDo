@@ -1,4 +1,8 @@
-<div class="wrapper" [ngClass]="{'expired': task.status === 'expired' ,'orange': remainingTime < 120, 'on-going': remainingTime > 120 || task.status === 'on-going', 'completed': task.status === 'completed'  }">
+<div class="wrapper" [ngClass]="{
+'expired': task.status === 'expired' ,
+'completed': task.status === 'completed',
+'orange': remainingTime < 120 && task.status === 'on-going', 
+'on-going': remainingTime > 120 || task.status === 'on-going'   }">
 <p>
     {{task.task}}  
     <br>
