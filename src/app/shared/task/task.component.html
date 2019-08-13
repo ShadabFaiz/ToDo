@@ -1,8 +1,8 @@
-<div class="taskStatusIndicator" [ngClass]="{'red': remainingTime < 60,'orange': remainingTime < 120, 'green': remainingTime > 120  }"></div>
+<div class="wrapper" [ngClass]="{'expired': task.status === 'expired' ,'orange': remainingTime < 120, 'on-going': remainingTime > 120 || task.status === 'on-going', 'completed': task.status === 'completed'  }">
 <p>
-    {{task.task}}
+    {{task.task}}  
     <br>
-    Status: {{task.status}}
+    Status: {{task.status}} 
     <br>
     <small> Created On: {{task._id | date: 'medium'}}</small>
 
@@ -13,12 +13,9 @@
     <i class="fas fa-trash" (click)="deleteTask()"></i>
  </span>
 
-
-
-
-<p *ngIf="remainingTime > 0">
+<p *ngIf="remainingTime > 0 && task.status === 'on-going'">
     Time Remaining: {{remainingTime}}
 </p>
 
 
-
+</div>

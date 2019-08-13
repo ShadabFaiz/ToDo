@@ -3,38 +3,64 @@
     height: 10px;
 };
 
-.green::before {
-    content: "";
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    right: 0px;
-    height: 20px;
-    background: green;
+.wrapper {
+    display: block;
+    margin: 1% auto;
+    border-radius: 5px;
+    padding: 1% 2%;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    transition: all 1s;
 }
 
-.orange::before {
-    content: "";
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    right: 0px;
-    height: 20px;
-    background: orange;
+.expired {
+    background: linear-gradient(45deg, #e01e1e, #3a4645);
 }
 
-.red::before {
-    content: "";
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    right: 0px;
-    height: 20px;
-    background: red;
+.on-going {
+    background: linear-gradient(45deg, #0c7f8a, #8c3f3f);
 }
+
+.completed {
+    background: linear-gradient(45deg, #12AF5A, #3a4645);
+}
+
+.orange {
+    background: linear-gradient(45deg, #c56009, #3a4645);
+}
+// .green::before {
+//     content: "";
+//     position: absolute;
+//     top: 0px;
+//     left: 0px;
+//     width: 100%;
+//     right: 0px;
+//     height: 20px;
+//     background: green;
+// }
+
+// .orange::before {
+//     content: "";
+//     position: absolute;
+//     top: 0px;
+//     left: 0px;
+//     width: 100%;
+//     right: 0px;
+//     height: 20px;
+//     background: orange;
+// }
+
+// .red::before {
+//     content: "";
+//     position: absolute;
+//     top: 0px;
+//     left: 0px;
+//     width: 100%;
+//     right: 0px;
+//     height: 20px;
+//     background: red;
+// }
 
 .iconWrapper {
     padding: 1%;
@@ -53,24 +79,6 @@
     margin: 1% 8%;
 
 }
-
-// .iconWrapper > .text {
-//     background: white;
-//     color: #12af5b;
-//     padding: 20%;
-//     border-radius: 5px;
-//     font-size: 8px;
-
-//     // visibility: hidden;
-//     transition-duration: 500ms;
-//     transition-property: all;
-//     // opacity: 0;
-// }
-
-// .icon:hover .text{
-//     // visibility:  visible;
-//     opacity: 1;
-// }
 
 .iconWrapper >  i:hover {
     transform: scale(1.3);

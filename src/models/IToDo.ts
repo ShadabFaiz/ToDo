@@ -6,8 +6,6 @@ export interface IToDO {
 }
 
 
-
-
 export const ExpireOptions:ExpirationOption[] = [
     {duration: 30, type: 'sec', text: '30 Sec'  },
     {duration: 1, type: 'min', text: '1 Min' },
@@ -18,11 +16,12 @@ export const ExpireOptions:ExpirationOption[] = [
 ];
 
 
-
 interface ExpirationOption {
     duration: number;
     type: 'sec' | 'min' | 'hr',
-    text: string;}
+    text: string;
+}
+
 
 type TimeStamp = number;
 

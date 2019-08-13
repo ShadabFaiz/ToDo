@@ -18,8 +18,7 @@ export class TaskComponent implements OnInit {
   remainingTime: number;  // Denote how much time is left before task is expired.
   interval;
 
-  constructor() { 
-  }
+  constructor() {   }
 
   ngOnInit() {
     this.setExpireTime(this.task);
@@ -36,6 +35,7 @@ export class TaskComponent implements OnInit {
 
   markAsCompleted() {
     this.task = {...this.task, status: 'completed'};
+    this.remainingTime = null;
     this.complete.emit(this.task);
   }
 
@@ -67,7 +67,7 @@ export class TaskComponent implements OnInit {
     if(this.remainingTime <= 0) return;
     let taskExpiresOn = TaskSortUtil.getTaskExpirationTime(task);
     this.remainingTime = taskExpiresOn ?
-     +((taskExpiresOn.getTime() - Date.now())/1000).toFixed(0): null;
+     +((taskExpiresOn.getTime() - Date.now())/1000).toFixed(0): 0;
   }
 
 }

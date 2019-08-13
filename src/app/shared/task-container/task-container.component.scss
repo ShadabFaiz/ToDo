@@ -4,19 +4,8 @@
     margin: 2% auto;
 }
 
-app-task {
-    display: block;
-    margin: 1% auto;
-    background: #12af5b;
-    border-radius: 5px;
-    padding: 1% 2%;
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
-
 .searchForm {
-    justify-content: start;
+    justify-content: flex-start;
     display: flex;
     flex-wrap: wrap;
 }
