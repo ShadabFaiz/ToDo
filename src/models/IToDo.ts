@@ -2,7 +2,7 @@ export interface IToDO {
     _id: TimeStamp;
     task: string;
     expiresOn: ExpirationOption;
-    status: TODOSTATUS;
+    status: TaskStatus;
 }
 
 
@@ -26,4 +26,10 @@ interface ExpirationOption {
 type TimeStamp = number;
 
 
-export type TODOSTATUS = 'completed' | 'on-going' | 'expired';
+export type TODOSTATUS = TaskStatus.COMPLETED | TaskStatus.ON_GOING | TaskStatus.EXPIRED;
+
+export enum TaskStatus {
+    COMPLETED= 'completed',
+    ON_GOING='on-going',
+    EXPIRED='expired'
+}

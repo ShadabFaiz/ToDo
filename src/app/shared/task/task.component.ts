@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IToDO } from 'src/models/IToDo';
+import { IToDO, TaskStatus } from 'src/models/IToDo';
 import { TaskSortUtil } from 'src/utils/TaskSortUtil';
 
 @Component({
@@ -36,7 +36,7 @@ export class TaskComponent implements OnInit {
   }
 
   markAsCompleted() {
-    this.task = {...this.task, status: 'completed'};
+    this.task = {...this.task, status: TaskStatus.COMPLETED};
     this.remainingTime = null;
     this.complete.emit(this.task);
   }
@@ -63,7 +63,7 @@ export class TaskComponent implements OnInit {
 
   private updateTaskStatus() {
     if(this.remainingTime <= 0)
-      this.task = {...this.task, status: 'expired'};
+      this.task = {...this.task, status: TaskStatus.EXPIRED};
   }
 
   private updateRemainingTime(task: IToDO) {

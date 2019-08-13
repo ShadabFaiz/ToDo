@@ -2,7 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TaskService } from 'src/app/services/task/task.service';
-import { IToDO, TODOSTATUS } from 'src/models/IToDo';
+import { IToDO, TaskStatus, TODOSTATUS } from 'src/models/IToDo';
 import { sortCondition, TaskSortUtil } from 'src/utils/TaskSortUtil';
 
 @Component({
@@ -27,9 +27,9 @@ export class TaskContainerComponent implements OnInit, OnChanges {
   searchForm: FormGroup;
 
   filterOptions: {value: TODOSTATUS, text: string}[] = [
-    {value: 'completed', text: 'Completed'},
-    {value: 'expired', text: 'Expired'},
-    {value: 'on-going', text: 'On Going'}
+    {value: TaskStatus.COMPLETED, text: 'Completed'},
+    {value: TaskStatus.EXPIRED, text: 'Expired'},
+    {value: TaskStatus.ON_GOING, text: 'On Going'}
   ];
 
   sortingOption: {value: sortCondition, text: string }[] = [
@@ -64,7 +64,7 @@ export class TaskContainerComponent implements OnInit, OnChanges {
 
 
   onTaskComplete(taskCompleted: IToDO) {
-    taskCompleted.status = 'completed';
+    taskCompleted.status = TaskStatus.COMPLETED;
     const index = this.taskList.findIndex(task => task._id === taskCompleted._id);
     if(index >= 0)
       this.taskList[index] === taskCompleted;
@@ -80,11 +80,10 @@ export class TaskContainerComponent implements OnInit, OnChanges {
    *  show the expired task even though the filter is set to something else.
    */
   onTaskExpire(expiredTask: IToDO) {
-    expiredTask = {...expiredTask, status: 'expired'};
+    expiredTask = {...expiredTask, status: TaskStatus.EXPIRED};
     const index = this.taskList.findIndex(task => task._id === expiredTask._id);
     if(index >= 0) this.taskList[index] = expiredTask;
     this.updateListInViewByFilterCondition(this.searchForm.value.filterBy, this.taskList);
-    // this.taskList = this.taskList.filter(task => task._id !== expiredTask._id);
   }
 
 

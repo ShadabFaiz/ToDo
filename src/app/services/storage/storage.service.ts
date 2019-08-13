@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IToDO } from 'src/models/IToDo';
+import { IToDO, TaskStatus } from 'src/models/IToDo';
 
 @Injectable({
   providedIn: 'root'
@@ -8,21 +8,21 @@ export class StorageService {
    private defaultTasks: IToDO[] = [
      {
         task: 'task 1', expiresOn: {duration: 30, type: 'sec', text: '30 secs'}, 
-        _id: Date.now(), status: 'on-going'},
+        _id: Date.now(), status: TaskStatus.ON_GOING},
      {
        task: 'task 2', expiresOn: {duration: 60, type: 'min', text: '30 secs'}, 
        _id: Date.now() - (8*1000),
-       status: 'on-going'
+       status: TaskStatus.ON_GOING
       },
      {
         task: 'task 3', expiresOn: {duration: 20, type: 'sec', text: '30 secs'}, 
         _id: Date.now() - (10*1000),
-        status: 'on-going'
+        status: TaskStatus.ON_GOING
     },
      {
        task: 'task 4', expiresOn: {duration: 10, type: 'sec', text: '30 secs'}, 
        _id: Date.now() - (5*1000),
-       status: 'on-going'
+       status: TaskStatus.ON_GOING
       }
    ];
 

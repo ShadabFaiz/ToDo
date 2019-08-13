@@ -10,3 +10,8 @@
 .flex_center {
     justify-content: center;
 }
+
+
+body, app-task-container {
+    overflow-x: hidden;
+}

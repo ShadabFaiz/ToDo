@@ -17,3 +17,19 @@ form > .task {
     width: 30%;
     min-width: fit-content;
 }
+
+.taskCreationForm {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+
+.taskCreationForm > mat-form-field {
+    width: 30%;
+    margin: 1%;
+}
+
+.taskCreationForm > button {
+    height: fit-content;
+}

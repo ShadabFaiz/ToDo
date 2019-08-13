@@ -1,6 +1,6 @@
 <div class="flex flex_center">
 
-  <form [formGroup]="toDoForm" (ngSubmit)="onFormSubmit()">
+  <form [formGroup]="toDoForm" (ngSubmit)="onFormSubmit()" class="taskCreationForm">
     <mat-form-field class="task">
       <input matInput placeholder="I should do..." formControlName="task">
     </mat-form-field>
