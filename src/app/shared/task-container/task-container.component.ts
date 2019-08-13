@@ -10,7 +10,7 @@ import { sortCondition, TaskSortUtil } from 'src/utils/TaskSortUtil';
   templateUrl: './task-container.component.html',
   styleUrls: ['./task-container.component.scss'],
   animations: [
-    trigger('TopToBottom', [  
+    trigger('LeftToRight', [  
       transition(':enter', [
         style({ transform: 'translateX(-100%)', opacity: 0 }),
         animate('1s ease-in-out', style({ transform: 'translateX(0)', opacity: 1  }))]),
@@ -127,7 +127,7 @@ export class TaskContainerComponent implements OnInit, OnChanges {
 
   private createFilterForm() {
     this.searchForm = this._formBuilder.group({
-      filterBy: [['on-going', 'completed', 'expired']],
+      filterBy: [['on-going']],
       sortBy: ['timeLeft']
     });
   }

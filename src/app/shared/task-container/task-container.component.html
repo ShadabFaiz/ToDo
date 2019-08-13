@@ -21,7 +21,7 @@
     </form>
 
     <app-task 
-    [@TopToBottom]
+    [@LeftToRight]="'task'"
     *ngFor="let task of filteredList"
     [task]="task"
     (expired)="onTaskExpire($event)"
