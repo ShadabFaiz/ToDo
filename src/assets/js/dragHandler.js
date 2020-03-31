@@ -1,6 +1,12 @@
 "use strict";
 var elementBeingDragged;
-window.addEventListener("DOMContentLoaded", () => {
+const observer = new MutationObserver(setupProcess);
+observer.observe(document.body, {
+  attributeFilter: ["draggable"],
+  subtree: true
+});
+
+function setupProcess() {
   const draggableElements = document.querySelectorAll("[draggable=true]");
   for (var i = 0; i < draggableElements.length; i++) {
     const element = draggableElements.item(i);
@@ -10,7 +16,7 @@ window.addEventListener("DOMContentLoaded", () => {
       element.addEventListener("dragover", dragOverDraggable);
     }
   }
-});
+}
 
 /**
  *
