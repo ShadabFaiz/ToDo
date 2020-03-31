@@ -1,32 +1,32 @@
 .taskStatusIndicator {
-    width: 100%;
-    height: 10px;
-};
+  width: 100%;
+  height: 10px;
+}
 
 .wrapper {
-    display: block;
-    margin: 1% auto;
-    border-radius: 5px;
-    padding: 1% 2%;
-    color: white;
-    position: relative;
-    overflow: hidden;
+  display: block;
+  margin: 1% auto;
+  border-radius: 5px;
+  padding: 1% 2%;
+  color: white;
+  position: relative;
+  overflow: hidden;
 }
 
 .expired {
-    background: linear-gradient(45deg, #e01e1e, #3a4645);
+  background: linear-gradient(45deg, #e01e1e, #3a4645);
 }
 
 .on-going {
-    background: linear-gradient(45deg, #0c7f8a, #8c3f3f);
+  background: #0b790b;
 }
 
 .completed {
-    background: linear-gradient(45deg, #12AF5A, #3a4645);
+  background: linear-gradient(45deg, #12af5a, #3a4645);
 }
 
-.orange {
-    background: linear-gradient(45deg, #c56009, #3a4645);
+.to-be-expired {
+  background: rgb(156, 17, 75);
 }
 // .green::before {
 //     content: "";
@@ -39,7 +39,7 @@
 //     background: green;
 // }
 
-// .orange::before {
+// .to-be-expired::before {
 //     content: "";
 //     position: absolute;
 //     top: 0px;
@@ -47,7 +47,7 @@
 //     width: 100%;
 //     right: 0px;
 //     height: 20px;
-//     background: orange;
+//     background: to-be-expired;
 // }
 
 // .red::before {
@@ -62,24 +62,22 @@
 // }
 
 .iconWrapper {
-    padding: 1%;
-    border-radius: 50%;
-    width: 40px;
-    position: absolute;
-    right: 14px;
-    top: 15px;
-    cursor: pointer;
+  padding: 1%;
+  border-radius: 50%;
+  width: 40px;
+  position: absolute;
+  right: 14px;
+  top: 15px;
+  cursor: pointer;
 }
 
 .iconWrapper > i {
-    color: white;
-    transition-property: transform;
-    transition-duration: 500ms;
-    margin: 1% 8%;
-
+  color: white;
+  transition-property: transform;
+  transition-duration: 500ms;
+  margin: 1% 8%;
 }
 
-.iconWrapper >  i:hover {
-    transform: scale(1.3);
+.iconWrapper > i:hover {
+  transform: scale(1.3);
 }
-

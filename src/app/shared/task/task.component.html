@@ -1,25 +1,33 @@
-<div class="wrapper" [ngClass]="{
-'expired': task?.status === 'expired' ,
-'completed': task?.status === 'completed',
-'orange': remainingTime < 120 && task?.status === 'on-going', 
-'on-going': remainingTime > 120 || task?.status === 'on-going'   }">
-<p>
-    {{task?.task}}  
-    <br>
-    Status: {{task?.status}} 
-    <br>
-    <small> Created On: {{task?._id | date: 'medium'}}</small>
+<div
+  class="wrapper"
+  [ngClass]="{
+    expired: task?.status === 'expired',
+    completed: task?.status === 'completed',
+    'to-be-expired': remainingTime < 120 && task?.status === 'on-going',
+    'on-going': remainingTime > 120 || task?.status === 'on-going'
+  }"
+>
+  <p>
+    {{ task.task }}
+    <br />
+    Status: {{ task?.status }}
+    <br />
+    <span *ngIf="task.status === 'expired'">
+      Duration: {{ task.expiresOn.text }} <br />
+    </span>
+    <small> Created On: {{ task?._id | date: "medium" }}</small>
+  </p>
 
-</p>
-
-<span class="iconWrapper"> 
-    <i *ngIf="task?.status === 'on-going'" class="fas fa-check-square" (click)="markAsCompleted()"></i>
+  <span class="iconWrapper">
+    <i
+      *ngIf="task?.status === 'on-going'"
+      class="fas fa-check-square"
+      (click)="markAsCompleted()"
+    ></i>
     <i class="fas fa-trash" (click)="deleteTask()"></i>
- </span>
+  </span>
 
-<p *ngIf="remainingTime > 0 && task.status === 'on-going'">
-    Time Remaining: {{remainingTime}}
-</p>
-
-
+  <p *ngIf="remainingTime > 0 && task.status === 'on-going'">
+    Time Remaining: {{ remainingTime }}
+  </p>
 </div>
