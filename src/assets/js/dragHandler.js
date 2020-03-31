@@ -29,7 +29,6 @@ function dragstart_handler(event) {
   );
 
   setTimeout(() => {
-    event.srcElement.class;
     event.srcElement.style.zIndex = -1;
     event.srcElement.style.opacity = 0.5;
   }, 0);
