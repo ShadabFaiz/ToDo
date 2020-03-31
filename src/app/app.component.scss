@@ -1,35 +1,48 @@
-
-
 form {
-    width: 50%;
-    min-width: 200px;
+  width: 50%;
+  min-width: 200px;
+}
+
+@media (max-width: 768px) {
+  form {
+    width: 100%;
+  }
+
+  .taskCreationForm {
+    button[type="submit"] {
+      margin-left: 5%;
+    }
+    .task {
+      width: 100%;
+    }
+  }
 }
 
 form > mat-form-field {
-    display: block;
+  display: block;
 }
 
 form > .task {
-    width: 100%;
+  width: 100%;
 }
 
 .taskOption {
-    width: 30%;
-    min-width: fit-content;
+  width: 30%;
+  min-width: fit-content;
 }
 
 .taskCreationForm {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: baseline;
 }
 
 .taskCreationForm > mat-form-field {
-    width: 30%;
-    margin: 1%;
+  width: 30%;
+  margin: 1%;
 }
 
 .taskCreationForm > button {
-    height: fit-content;
+  height: fit-content;
 }
