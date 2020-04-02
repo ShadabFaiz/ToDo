@@ -6,6 +6,8 @@ observer.observe(document.body, {
   subtree: true
 });
 
+window.addEventListener("DOMContentLoaded", () => setupProcess());
+
 function setupProcess() {
   const draggableElements = document.querySelectorAll("[draggable=true]");
   for (var i = 0; i < draggableElements.length; i++) {
